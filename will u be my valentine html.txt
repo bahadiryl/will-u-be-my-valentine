@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>will u be my valentine?</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://i.pinimg.com/originals/74/e9/f9/74e9f9ecd2fab333a6ea926dd18538fd.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  h1 {
+    margin-top: -50px;
+    font-size: 36px;
+    color: #000;
+    z-index: 2;
+  }
+  .box {
+    margin-top: 10px;
+    width: 400px;
+    height: 50px;
+    background-color: rgba(255, 192, 203, 0.9);
+    border: 2px solid #333;
+    border-radius: 10px;
+    z-index: 1;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .button {
+    width: 150px;
+    height: 80px;
+    margin: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, width 0.3s, height 0.3s, font-size 0.3s;
+  }
+  #yes {
+    background-color: green;
+  }
+  #red {
+    background-color: red;
+  }
+  .button:hover {
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="box" id="redBox"></div>
+  <h1 id="question">will u be my valentine?</h1>
+  <div class="button-container">
+    <button id="yes" class="button" style="transition: width 0.3s, height 0.3s, font-size 0.3s;" onclick="yesClicked()">Evet</button>
+    <button id="red" class="button" onclick="noClicked()">Hayır</button>
+  </div>
+  <div id="gifContainer" style="display: none;">
+    <img src="https://c.tenor.com/Jc9jT66AJRwAAAAd/tenor.gif" alt="Gif">
+  </div>
+  <div id="videoContainer" style="display: none;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/g7tzDP3oI2Y?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  var previousWord = "";
+
+function noClicked() {
+    var redButton = document.getElementById('red');
+
+    // Hayır butonunu %10 küçült
+    var computedStyleRed = window.getComputedStyle(redButton);
+    var currentWidthRed = parseFloat(computedStyleRed.getPropertyValue('width'));
+    var currentHeightRed = parseFloat(computedStyleRed.getPropertyValue('height'));
+    redButton.style.width = (currentWidthRed * 0.9) + 'px';
+    redButton.style.height = (currentHeightRed * 0.9) + 'px';
+
+    // Evet butonunu %10 büyüt
+    var yesButton = document.getElementById('yes');
+    var computedStyleYes = window.getComputedStyle(yesButton);
+    var currentWidthYes = parseFloat(computedStyleYes.getPropertyValue('width'));
+    var currentHeightYes = parseFloat(computedStyleYes.getPropertyValue('height'));
+    var currentFontSizeYes = parseFloat(computedStyleYes.getPropertyValue('font-size'));
+    yesButton.style.width = (currentWidthYes * 1.1) + 'px';
+    yesButton.style.height = (currentHeightYes * 1.1) + 'px';
+    yesButton.style.fontSize = (currentFontSizeYes * 1.1) + 'px';
+
+    // Rastgele kelimeyi değiştir
+    changeRedText();
+}
+
+function changeRedText() {
+    var words = ["emin misin", "bi daha düşün", "?????", "bro", "fuck u"];
+    var filteredWords = words.filter(word => word !== previousWord);
+    var randomIndex = Math.floor(Math.random() * filteredWords.length);
+    var redButton = document.getElementById('red');
+    var selectedWord = filteredWords[randomIndex];
+    redButton.innerHTML = selectedWord; // Rastgele kelimeyi kırmızı butonun içeriğine yerleştirir
+    previousWord = selectedWord;
+
+    // Hayır butonunu %10 küçült
+    var computedStyleRed = window.getComputedStyle(redButton);
+    var currentWidthRed = parseFloat(computedStyleRed.getPropertyValue('width'));
+    var currentHeightRed = parseFloat(computedStyleRed.getPropertyValue('height'));
+    redButton.style.width = (currentWidthRed * 0.9) + 'px';
+    redButton.style.height = (currentHeightRed * 0.9) + 'px';
+
+    // Evet butonunu %10 büyüt
+    var yesButton = document.getElementById('yes');
+    var computedStyleYes = window.getComputedStyle(yesButton);
+    var currentWidthYes = parseFloat(computedStyleYes.getPropertyValue('width'));
+    var currentHeightYes = parseFloat(computedStyleYes.getPropertyValue('height'));
+    var currentFontSizeYes = parseFloat(computedStyleYes.getPropertyValue('font-size'));
+    yesButton.style.width = (currentWidthYes * 1.1) + 'px';
+    yesButton.style.height = (currentHeightYes * 1.1) + 'px';
+    yesButton.style.fontSize = (currentFontSizeYes * 1.1) + 'px';
+}
+
+function yesClicked() {
+    var buttonContainer = document.querySelector('.button-container');
+    buttonContainer.style.display = 'none'; // Butonları gizle
+
+    var gifContainer = document.getElementById('gifContainer');
+    gifContainer.style.display = 'block'; // GIF'i göster
+
+    var question = document.getElementById('question');
+    var currentFontSizeQuestion = parseFloat(window.getComputedStyle(question).getPropertyValue('font-size'));
+    question.textContent = "pls dont sell me"; // Yazıyı değiştir
+    question.style.fontSize = (currentFontSizeQuestion * 0.5) + 'px'; // Yazı boyutunu küçült
+
+    var videoContainer = document.getElementById('videoContainer');
+    videoContainer.style.display = 'block'; // Videoyu göster
+}
+</script>
+
+</body>
+</html>
